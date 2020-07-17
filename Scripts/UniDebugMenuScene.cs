@@ -113,7 +113,7 @@ namespace Kogane
 
 			DebugToastUI.SetInstance( m_debugToastUI );
 
-			m_openButtonUI.onClick.SetListener( () => mOnOpen?.Invoke() );
+			m_openButtonUI.OnClick = () => mOnOpen?.Invoke();
 			m_closeButtonUI.onClick.SetListener( () => Close() );
 
 			// 作業用にアクティブにしたままでも正常に動作するように

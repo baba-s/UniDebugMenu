@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -28,7 +29,7 @@ namespace Kogane.Internal
 		//==============================================================================
 		// イベント
 		//==============================================================================
-		public UnityEvent onClick;
+		public Action OnClick { get; set; }
 
 		//==============================================================================
 		// 関数
@@ -71,7 +72,7 @@ namespace Kogane.Internal
 		public void OnPointerClick( PointerEventData e )
 		{
 			if ( m_isDrag ) return;
-			onClick.Invoke();
+			OnClick?.Invoke();
 		}
 	}
 }
