@@ -10,12 +10,12 @@ namespace Kogane
 	/// </summary>
 	public enum DMType
 	{
-		TEXT_TAB_6		,	// テキスト表示 ( タブ  6個 )
-		TEXT_TAB_12		,	// テキスト表示 ( タブ 12個 )
-		BUTTON_COL_2	,	// ボタン表示 ( 2列 )
-		BUTTON_COL_3	,	// ボタン表示 ( 3列 )
-		COMMAND_TAB_6	,	// コマンド表示 ( タブ  6個 )
-		COMMAND_TAB_12	,	// コマンド表示 ( タブ 12個 )
+		TEXT_TAB_6,     // テキスト表示 ( タブ  6個 )
+		TEXT_TAB_12,    // テキスト表示 ( タブ 12個 )
+		BUTTON_COL_2,   // ボタン表示 ( 2列 )
+		BUTTON_COL_3,   // ボタン表示 ( 3列 )
+		COMMAND_TAB_6,  // コマンド表示 ( タブ  6個 )
+		COMMAND_TAB_12, // コマンド表示 ( タブ 12個 )
 	}
 
 	/// <summary>
@@ -41,18 +41,18 @@ namespace Kogane
 		//==============================================================================
 		// 変数(SerializeField)
 		//==============================================================================
-		[SerializeField] private GameObject			m_openBaseUI			= null;
-		[SerializeField] private DraggableButtonUI	m_openButtonUI			= null;
-		[SerializeField] private CanvasGroup		m_closeBaseUI			= null;
-		[SerializeField] private Button				m_closeButtonUI			= null;
-		[SerializeField] private Transform			m_instantiateRoot		= null;
-		[SerializeField] private TextListUI			m_textListUI_Tab6		= null;
-		[SerializeField] private TextListUI			m_textListUI_Tab12		= null;
-		[SerializeField] private ButtonListUI		m_buttonListUI_Col2		= null;
-		[SerializeField] private ButtonListUI		m_buttonListUI_Col3		= null;
-		[SerializeField] private CommandListUI		m_commandListUI_Tab6	= null;
-		[SerializeField] private CommandListUI		m_commandListUI_Tab12	= null;
-		[SerializeField] private DebugToastUI		m_debugToastUI			= null;
+		[SerializeField] private GameObject        m_openBaseUI          = null;
+		[SerializeField] private DraggableButtonUI m_openButtonUI        = null;
+		[SerializeField] private CanvasGroup       m_closeBaseUI         = null;
+		[SerializeField] private Button            m_closeButtonUI       = null;
+		[SerializeField] private Transform         m_instantiateRoot     = null;
+		[SerializeField] private TextListUI        m_textListUI_Tab6     = null;
+		[SerializeField] private TextListUI        m_textListUI_Tab12    = null;
+		[SerializeField] private ButtonListUI      m_buttonListUI_Col2   = null;
+		[SerializeField] private ButtonListUI      m_buttonListUI_Col3   = null;
+		[SerializeField] private CommandListUI     m_commandListUI_Tab6  = null;
+		[SerializeField] private CommandListUI     m_commandListUI_Tab12 = null;
+		[SerializeField] private DebugToastUI      m_debugToastUI        = null;
 
 		//==============================================================================
 		// 変数(readonly)
@@ -61,7 +61,7 @@ namespace Kogane
 		//==============================================================================
 		// 変数
 		//==============================================================================
-		private bool m_isOpen;	// 開いている場合 true
+		private bool m_isOpen; // 開いている場合 true
 
 		//==============================================================================
 		// 変数(static)
@@ -75,8 +75,8 @@ namespace Kogane
 		//==============================================================================
 		// イベント(static)
 		//==============================================================================
-		public static event Action	mOnOpen		;
-		public static event Action	mOnChange	;
+		public static event Action mOnOpen;
+		public static event Action mOnChange;
 
 		//==============================================================================
 		// 関数
@@ -88,9 +88,9 @@ namespace Kogane
 		{
 			if ( m_instance == this )
 			{
-				m_instance	= null;
-				mOnOpen		= null;
-				mOnChange	= null;
+				m_instance = null;
+				mOnOpen    = null;
+				mOnChange  = null;
 
 				DebugToastUI.SetInstance( null );
 			}
@@ -113,16 +113,16 @@ namespace Kogane
 
 			DebugToastUI.SetInstance( m_debugToastUI );
 
-			m_openButtonUI	.onClick.SetListener( () => mOnOpen?.Invoke() );
-			m_closeButtonUI	.onClick.SetListener( () => Close() );
+			m_openButtonUI.onClick.SetListener( () => mOnOpen?.Invoke() );
+			m_closeButtonUI.onClick.SetListener( () => Close() );
 
 			// 作業用にアクティブにしたままでも正常に動作するように
-			m_textListUI_Tab6	.gameObject.SetActive( false );
-			m_textListUI_Tab12	.gameObject.SetActive( false );
-			m_buttonListUI_Col2	.gameObject.SetActive( false );
-			m_buttonListUI_Col3	.gameObject.SetActive( false );
-			m_commandListUI_Tab6	.gameObject.SetActive( false );
-			m_commandListUI_Tab12	.gameObject.SetActive( false );
+			m_textListUI_Tab6.gameObject.SetActive( false );
+			m_textListUI_Tab12.gameObject.SetActive( false );
+			m_buttonListUI_Col2.gameObject.SetActive( false );
+			m_buttonListUI_Col3.gameObject.SetActive( false );
+			m_commandListUI_Tab6.gameObject.SetActive( false );
+			m_commandListUI_Tab12.gameObject.SetActive( false );
 
 			// 閉じた状態にします
 			m_openBaseUI.SetActive( false );
@@ -138,11 +138,14 @@ namespace Kogane
 
 			m_openBaseUI.SetActive( true );
 
-			OpenImpl( type, creator, isActive =>
-			{
-				if ( !isActive ) return;
-				Close();
-			} );
+			OpenImpl
+			(
+				type, creator, isActive =>
+				{
+					if ( !isActive ) return;
+					Close();
+				}
+			);
 		}
 
 		/// <summary>
@@ -150,9 +153,9 @@ namespace Kogane
 		/// </summary>
 		public void OpenAdd<T>
 		(
-			DMType				type		,
-			ListCreatorBase<T>	creator		,
-			GameObject			gameObject
+			DMType             type,
+			ListCreatorBase<T> creator,
+			GameObject         gameObject
 		)
 		{
 			OpenImpl( type, creator, gameObject.SetActive );
@@ -163,9 +166,9 @@ namespace Kogane
 		/// </summary>
 		private void OpenImpl<T>
 		(
-			DMType				type		,
-			ListCreatorBase<T>	creator		,
-			Action<bool>		onSetActive
+			DMType             type,
+			ListCreatorBase<T> creator,
+			Action<bool>       onSetActive
 		)
 		{
 			// 表示するコンテンツの複製元を取得します
@@ -196,13 +199,14 @@ namespace Kogane
 		{
 			switch ( type )
 			{
-				case DMType.TEXT_TAB_6		: return m_textListUI_Tab6		;
-				case DMType.TEXT_TAB_12		: return m_textListUI_Tab12		;
-				case DMType.BUTTON_COL_2	: return m_buttonListUI_Col2	;
-				case DMType.BUTTON_COL_3	: return m_buttonListUI_Col3	;
-				case DMType.COMMAND_TAB_6	: return m_commandListUI_Tab6	;
-				case DMType.COMMAND_TAB_12	: return m_commandListUI_Tab12	;
+				case DMType.TEXT_TAB_6:     return m_textListUI_Tab6;
+				case DMType.TEXT_TAB_12:    return m_textListUI_Tab12;
+				case DMType.BUTTON_COL_2:   return m_buttonListUI_Col2;
+				case DMType.BUTTON_COL_3:   return m_buttonListUI_Col3;
+				case DMType.COMMAND_TAB_6:  return m_commandListUI_Tab6;
+				case DMType.COMMAND_TAB_12: return m_commandListUI_Tab12;
 			}
+
 			return null;
 		}
 

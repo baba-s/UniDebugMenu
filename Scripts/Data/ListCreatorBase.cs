@@ -13,8 +13,8 @@ namespace Kogane
 		//==============================================================================
 		// 変数
 		//==============================================================================
-		private UniDebugMenuScene	m_debugMenuScene	;
-		private GameObject			m_gameObject		;
+		private UniDebugMenuScene m_debugMenuScene;
+		private GameObject        m_gameObject;
 
 		//==============================================================================
 		// プロパティ
@@ -47,12 +47,12 @@ namespace Kogane
 		/// <summary>
 		/// タブ名の配列を返します
 		/// </summary>
-		public virtual string[] TabNameList => new string[ 0 ];
+		public virtual string[] TabNameList => new string[0];
 
 		/// <summary>
 		/// オプションボタンの挙動を返します
 		/// </summary>
-		public virtual ActionData[] OptionActionList => new ActionData[ 0 ];
+		public virtual ActionData[] OptionActionList => new ActionData[0];
 
 		//==============================================================================
 		// 関数
@@ -62,9 +62,9 @@ namespace Kogane
 		/// </summary>
 		public void Create( ListCreateData data )
 		{
-			m_debugMenuScene	= data.DebugMenuScene	;
-			m_gameObject		= data.GameObject		;
-			target				= data.Target			;
+			m_debugMenuScene = data.DebugMenuScene;
+			m_gameObject     = data.GameObject;
+			target           = data.Target;
 
 			DoCreate( data );
 		}
