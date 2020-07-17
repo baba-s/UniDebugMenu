@@ -1,25 +1,10 @@
-﻿using System;
-
-namespace Kogane.Internal
+﻿namespace Kogane.Internal
 {
 	/// <summary>
 	/// 選択中の bool 値を管理するクラス
 	/// </summary>
 	internal sealed class SelectableBool : Selectable<bool>
 	{
-		//==============================================================================
-		// デリゲート
-		//==============================================================================
-		/// <summary>
-		/// 値が true に変更された時に呼び出されます
-		/// </summary>
-		public Action mChangedTrue;
-
-		/// <summary>
-		/// 値が false に変更された時に呼び出されます
-		/// </summary>
-		public Action mChangedFalse;
-
 		//==============================================================================
 		// 関数
 		//==============================================================================
@@ -60,21 +45,6 @@ namespace Kogane.Internal
 		public void False()
 		{
 			Value = false;
-		}
-
-		/// <summary>
-		/// 値が変更された時に呼び出されます
-		/// </summary>
-		protected override void DoOnChanged()
-		{
-			if ( Value )
-			{
-				mChangedTrue?.Invoke();
-			}
-			else
-			{
-				mChangedFalse?.Invoke();
-			}
 		}
 	}
 }
