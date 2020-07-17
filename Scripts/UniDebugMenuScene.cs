@@ -35,6 +35,7 @@ namespace Kogane
 	/// <summary>
 	/// デバッグメニュー画面を管理するクラス
 	/// </summary>
+	[AddComponentMenu( "" )]
 	[DisallowMultipleComponent]
 	public sealed class UniDebugMenuScene : MonoBehaviour
 	{
